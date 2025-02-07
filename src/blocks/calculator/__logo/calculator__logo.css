@@ -1,0 +1,7 @@
+.calculator__logo{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,17 @@
+@import url("./__author/calculator__author.css");
+@import url("./__button/calculator__button.css");
+@import url("./__button/_color/calculator__button_color_grey.css");
+@import url("./__button/_color/calculator__button_color_orange.css");
+@import url("./__container/calculator__container.css");
+@import url("./__image/calculator__image.css");
+@import url("./__info/calculator__info.css");
+@import url("./__logo/calculator__logo.css");
+@import url("./__screen/calculator__screen.css");
+@import url("./__title/calculator__title.css");
+
+.calculator {
+  max-width: 720px;
+  background-color: #23242A;
+  margin: 28px auto;
+  padding: 0;
+}

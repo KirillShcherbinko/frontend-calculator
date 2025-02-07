@@ -4,6 +4,7 @@
   align-items: center;
   margin: 0 auto;
   padding: 0;
+  height: 100vh;
   box-sizing: border-box;
   background-color: #2f2f2f;
 }
