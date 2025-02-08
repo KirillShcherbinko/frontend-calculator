@@ -10,8 +10,7 @@
 @import url("./__title/calculator__title.css");
 
 .calculator {
-  max-width: 720px;
   background-color: #23242A;
-  margin: 28px auto;
+  margin: auto;
   padding: 0;
 }

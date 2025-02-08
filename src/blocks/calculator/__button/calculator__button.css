@@ -2,10 +2,10 @@
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 33px;
+  border-radius: 1vmin;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
-  font-size: 40px;
+  font-size: clamp(10px, 5vw, 40px);
   color: #DEE1EF;
   background-color: #5A5D6C;
 }

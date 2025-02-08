@@ -1,7 +1,14 @@
-.calculator__container{
+.calculator__container {
   display: grid;
-  grid-template-columns: repeat(4, 10vmin);
+  grid-template-columns: repeat(4, 14vmin);
   grid-template-rows: repeat(6, 8vmin);
   gap: 14px;
-  margin: 62px auto;
+  margin: 28px 24px;
+}
+
+@media screen and (max-width: 425px) {
+  .calculator__container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 }
