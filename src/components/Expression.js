@@ -1,4 +1,6 @@
-class Expression {
+import { ExpressionValidator } from "./ExpressionValidator";
+
+export class Expression {
 
   constructor() {
     this.expression = "";
@@ -10,88 +12,23 @@ class Expression {
     return this.expression[this.expression.length - 1] || "";
   }
 
-  // Проверка операторов
-  checkOperator(newSymbol) {
-    const lastSymbol = this.getLastSymbol();
-    const operatorRegex = /[+\-*÷^]/;
-
-    // Новый символ и последний символ являются операторами
-    const isOperator = operatorRegex.test(lastSymbol) && operatorRegex.test(newSymbol);
-
-    // Два минуса идут подряд
-    const isDoubleMinus = newSymbol === "-" && lastSymbol === "-";
-
-    // Удаление последнего символа при выполнении одного из условий
-    if (isOperator || isDoubleMinus) {
-      this.deleteLastSymbol();
-    }
-  }
-
-  // Проверка корректности выражений с константами
-  checkConst(newSymbol) {
-    const CONSTANTS = "eπ"
-    const lastSymbol = this.getLastSymbol();
-    const isLastConst = CONSTANTS.includes(lastSymbol);
-    const isNewConst = CONSTANTS.includes(newSymbol);
-    const operandRegex = /[0-9eπ]/;
-
-    // Добавляем знак умножения между символами, если среди них есть константа 
-    if ((isNewConst && operandRegex.test(lastSymbol)) || 
-        (isLastConst && (operandRegex.test(newSymbol) || newSymbol === "("))) {
-      this.expression += "*";
-    }
-  }
-
-  checkFractionalNumber(newSymbol) {
-    const lastSymbol = this.getLastSymbol();
-    const digitRegex = /[0-9]/;
-
-    // Новый символ - точка
-    if (newSymbol === ".") {
-      // Последний символ не цифра
-      if (!digitRegex.test(lastSymbol)) return false;
-
-      // Последнее число в выражении
-      const lastNumber = this.expression.split(/[+\-*÷^()]/).pop();
-
-      // Проверка на наличие точек в последнем числе
-      if (lastNumber.includes(".")) return false;
-    } 
-
-    // Последний символ выражения ".", а новый символ не цифра 
-    if (lastSymbol === "." && !digitRegex.test(newSymbol)) return false;
-
-    return true;
-  }
-
-  // Выбор скобки в зависимости от выражения
-  checkBrackets() {
-    const lastSymbol = this.getLastSymbol();
-    const isOperand = /[0-9eπ]/.test(lastSymbol);
-
-    // Последний символ - цифра или константа и скобки не закрыты
-    if (isOperand && this.openedBracketCnt > 0) {
-      this.openedBracketCnt--;
-      return ")";
-    }
-
-    this.openedBracketCnt++;
-    return "(";
-  }
-
   // Добавление символа
   addSymbol(newSymbol) {
+    const lastSymbol = this.getLastSymbol();
     // Выбор скобки, если нажата кнопка "()"
     if (newSymbol === "()") {
-      newSymbol = this.checkBrackets();
+      newSymbol = ExpressionValidator.getValidBracket(this.openedBracketCnt, lastSymbol);
+      
+      // Изменение счётчика открытых скобок
+      if (newSymbol === "(") this.openedBracketCnt++;
+      else if (newSymbol === ")" && this.openedBracketCnt > 0) this.openedBracketCnt--;
     }
 
-    // Преобразование выражений для корректного вычисления
-    this.checkOperator(newSymbol);
-    this.checkConst(newSymbol);
-
-    // Можно ли поставтить точку
-    if (!this.checkFractionalNumber(newSymbol)) return;
+    // Проверки и преобразования выражений
+    if (ExpressionValidator.isValidOperator(newSymbol, lastSymbol)) this.deleteExpression();
+    if (ExpressionValidator.isValidBracketOperator(newSymbol, lastSymbol)) return;
+    if (ExpressionValidator.isValidConstMultiplication(newSymbol, lastSymbol)) this.expression += "*";
+    if (ExpressionValidator.isValidFractionalNumber(newSymbol, lastSymbol)) return;
 
     // Добавление нового символа к выражению
     this.expression += newSymbol;
