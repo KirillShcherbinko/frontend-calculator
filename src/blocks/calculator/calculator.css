@@ -2,6 +2,7 @@
 @import url("./__button/calculator__button.css");
 @import url("./__button/_color/calculator__button_color_grey.css");
 @import url("./__button/_color/calculator__button_color_orange.css");
+@import url("./__button/_long/calculator__button_long.css");
 @import url("./__container/calculator__container.css");
 @import url("./__error-message/calculator__error-message.css");
 @import url("./__image/calculator__image.css");

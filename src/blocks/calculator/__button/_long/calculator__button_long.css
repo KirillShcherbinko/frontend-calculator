@@ -1,0 +1,7 @@
+.calculator__button_long {
+  grid-column: 4;
+  grid-row: 5 / span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -53,7 +53,6 @@ export class Expression {
     // Добавление нового символа к выражению
     this.expression += newSymbol;
 
-    console.log(this.expression);
     return this.expression;
   }
 

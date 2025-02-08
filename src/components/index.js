@@ -51,13 +51,14 @@ buttons.forEach(button => {
       try {
         // Получение выражения
         let curExpression = expression.validateExpression();
+        console.log(curExpression);
 
         // Преобразование выражения к необходимому виду
         curExpression = curExpression.replace(/÷/g, "/");
         curExpression = curExpression.replace(/π/g, "pi");
 
         // Получение результата
-        const result = evaluate(curExpression);
+        const result = evaluate(curExpression).toString();
         inputElement.textContent = result;
 
         // Обновление полей объекта новыми значениями
@@ -70,7 +71,7 @@ buttons.forEach(button => {
           errorMessage: ""
         });
       } catch(err) {
-        const errorMessage = /[а-яА-ЯёЁ]/.test(err.messge) ? err.message : "Неверный формат";
+        const errorMessage = /[а-яА-ЯёЁ]/.test(err.message) ? err.message : "Неверный формат";
         errorMessageElement.textContent = errorMessage;
         saveState({
           expression: expression.getExpression(), 
@@ -94,6 +95,4 @@ buttons.forEach(button => {
       });
     });
   }
-})
-
-console.log(evaluate("1.e9"))
+});
