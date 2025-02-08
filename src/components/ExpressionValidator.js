@@ -26,14 +26,14 @@ export class ExpressionValidator {
     const operandRegex = /[0-9eπ]/;
 
     // Проверки на положение констант
-    const isConstLastSymbol = CONSTANTS.includes(newSymbol) && operandRegex.test(lastSymbol);
-    const isConstNewSymbol = CONSTANTS.includes(lastSymbol) && (operandRegex.test(newSymbol) || newSymbol === "(");
+    const isConstLastSymbol = CONSTANTS.includes(newSymbol) && operandRegex.test(lastSymbol) && lastSymbol;
+    const isConstNewSymbol = CONSTANTS.includes(lastSymbol) && (operandRegex.test(newSymbol) || newSymbol === "(") && lastSymbol;
 
     return isConstLastSymbol || isConstNewSymbol;
   }
 
   // Проверка на корректность дробных чисел
-  static isValidFractionalNumber(newSymbol, lastSymbol) {
+  static isValidFractionalNumber(expression, newSymbol, lastSymbol) {
     const digitRegex = /[0-9]/;
 
     // Новый символ - точка
@@ -42,21 +42,30 @@ export class ExpressionValidator {
       if (!digitRegex.test(lastSymbol)) return false;
 
       // Проверка на наличие точек в последнем числе
-      const lastNumber = this.expression.split(/[+\-*÷^()]/).pop();
+      const lastNumber = expression.split(/[+\-*/÷^()]/).pop();
       if (lastNumber.includes(".")) return false;
     } 
 
-    // Последний символ выражения ".", а новый символ не цифра 
-    return !(lastSymbol === "." && !digitRegex.test(newSymbol));
+    return true;
   }
 
+  // Проверка на возможность вычислить корень
   static isValidSqrtGetting(openedBracketCnt, newSymbol, lastSymbol) {
     return (/[0-9eπ]/.test(lastSymbol) || (lastSymbol === ")" && openedBracketCnt >= 0)) && newSymbol === "√";
   }
 
+  // Проверка на корректное местоположение оператора
+  static isValidOperatorLocation(newSymbol, lastSymbol) {
+    const operatorRegex = /[+*/÷^]/;
+    if(newSymbol === "√") return false;
+    else if (!lastSymbol && operatorRegex.test(newSymbol)) return false;
+    else if (lastSymbol === "-" && operatorRegex.test(newSymbol)) return false;
+    return true;
+  }
+
   // Плучение правильной скобки
   static getValidBracket(openedBracketCnt, lastSymbol) {
-    const isOperand = /[0-9eπ]/.test(lastSymbol);
-    return isOperand && openedBracketCnt > 0 ? ")" : "(";
+    const isOperand = /[0-9eπ)]/.test(lastSymbol);
+    return (isOperand && openedBracketCnt) > 0 ? ")" : "(";
   }
 }

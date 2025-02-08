@@ -15,6 +15,7 @@ export class Expression {
   // Добавление символа
   addSymbol(newSymbol) {
     const lastSymbol = this.getLastSymbol();
+    console.log(newSymbol);
     // Выбор скобки, если нажата кнопка "()"
     if (newSymbol === "()") {
       newSymbol = ExpressionValidator.getValidBracket(this.openedBracketCnt, lastSymbol);
@@ -25,14 +26,18 @@ export class Expression {
     }
 
     // Проверки и преобразования выражений
-    if (ExpressionValidator.isValidOperator(newSymbol, lastSymbol)) this.deleteExpression();
-    if (ExpressionValidator.isValidBracketOperator(newSymbol, lastSymbol)) return;
+    if (ExpressionValidator.isValidOperator(newSymbol, lastSymbol)) this.deleteLastSymbol();
+    if (ExpressionValidator.isValidBracketOperator(newSymbol, lastSymbol)) newSymbol = "";
     if (ExpressionValidator.isValidConstMultiplication(newSymbol, lastSymbol)) this.expression += "*";
-    if (ExpressionValidator.isValidFractionalNumber(newSymbol, lastSymbol)) return;
-    if (ExpressionValidator.isValidSqrtGetting(this.openedBracketCnt, newSymbol, lastSymbol)) this.expression += "^0.5";
+    if (!ExpressionValidator.isValidFractionalNumber(this.expression, newSymbol, lastSymbol)) newSymbol = "";
+    if (ExpressionValidator.isValidSqrtGetting(this.openedBracketCnt, newSymbol, lastSymbol)) newSymbol = "^0.5";
+    if (!ExpressionValidator.isValidOperatorLocation(newSymbol, lastSymbol)) newSymbol = "";
 
     // Добавление нового символа к выражению
     this.expression += newSymbol;
+
+    console.log(this.expression);
+    return this.expression;
   }
 
   // Удаление символа
@@ -44,6 +49,7 @@ export class Expression {
     else if (lastSymbol === ")") this.openedBracketCnt++;
 
     this.expression = this.expression.slice(0, -1);
+    return this.expression;
   }
   
   // Очистка выражения
