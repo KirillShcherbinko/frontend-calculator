@@ -1,8 +1,14 @@
 .calculator__author{
   font-family: "Inter", "Arial", sans-serif;
-  font-size: 12px;
+  font-size: clamp(5px, 2vw, 16px);  
   font-weight: 400;
   color: #DEE1EF;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (aspect-ratio > 4/3) {
+  .calculator__author {
+    font-size: clamp(5px, 3vh, 14px);
+  }
 }

@@ -1,14 +1,8 @@
 .calculator__container {
   display: grid;
   grid-template-columns: repeat(4, 14vmin);
-  grid-template-rows: repeat(6, 8vmin);
-  gap: 14px;
-  margin: 28px 24px;
+  grid-template-rows: repeat(6, 7vmin);
+  gap: 1.5vmin;
+  margin: clamp(8px, 2vw, 28px) clamp(8px, 2vw, 24px);
 }
 
-@media screen and (max-width: 425px) {
-  .calculator__container {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-}

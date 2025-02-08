@@ -29,6 +29,7 @@ export class Expression {
     if (ExpressionValidator.isValidBracketOperator(newSymbol, lastSymbol)) return;
     if (ExpressionValidator.isValidConstMultiplication(newSymbol, lastSymbol)) this.expression += "*";
     if (ExpressionValidator.isValidFractionalNumber(newSymbol, lastSymbol)) return;
+    if (ExpressionValidator.isValidSqrtGetting(this.openedBracketCnt, newSymbol, lastSymbol)) this.expression += "^0.5";
 
     // Добавление нового символа к выражению
     this.expression += newSymbol;

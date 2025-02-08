@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 24px 28px;
+  margin: clamp(8px, 2vw, 24px) clamp(8px, 2vw, 28px);
   padding: 0;
+  width: 62vmin;
+  height: 8vmin;
 }

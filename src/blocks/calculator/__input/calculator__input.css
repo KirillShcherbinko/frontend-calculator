@@ -1,0 +1,22 @@
+.calculator__input {
+  white-space: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  background-color: inherit; 
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-size: clamp(3px, 7vw, 75px);
+  color: #DEE1EF;
+}
+
+.calculator__input::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (aspect-ratio > 4/3) {
+  .calculator__input {
+    font-size: clamp(3px, 10vh, 75px);
+  }
+}

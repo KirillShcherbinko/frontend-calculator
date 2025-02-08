@@ -1,11 +1,20 @@
 .calculator__button{
+  display: flex;
+  text-align: center;
+  justify-content: center;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 1vmin;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
-  font-size: clamp(10px, 5vw, 40px);
+  font-size: clamp(4px, 5vw, 60px);
   color: #DEE1EF;
   background-color: #5A5D6C;
+}
+
+@media screen and (aspect-ratio > 4/3) {
+  .calculator__button {
+    font-size: clamp(4px, 6vh, 55px);
+  }
 }

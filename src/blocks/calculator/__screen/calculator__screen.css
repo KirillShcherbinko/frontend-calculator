@@ -1,0 +1,17 @@
+.calculator__screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: #3D3F4A;
+  padding: 5px;
+  margin: 0 clamp(8px, 2vw, 24px);
+  width: 62vmin;
+  height: 18vmin;
+}
+
+@media screen and (max-width: 240px) {
+  .calculator__screen {
+    padding: 2.5px;
+  }
+}

@@ -1,0 +1,15 @@
+.calculator__error-message {
+  background-color: inherit;
+  text-align: right;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: clamp(1px, 3vw, 24px);
+  color: red;
+}
+
+
+@media screen and (aspect-ratio > 4/3) {
+  .calculator__error-message {
+    font-size: clamp(3px, 3vh, 24px);
+  }
+}
+

@@ -34,7 +34,6 @@ export class ExpressionValidator {
 
   // Проверка на корректность дробных чисел
   static isValidFractionalNumber(newSymbol, lastSymbol) {
-    const lastSymbol = this.getLastSymbol();
     const digitRegex = /[0-9]/;
 
     // Новый символ - точка
@@ -49,6 +48,10 @@ export class ExpressionValidator {
 
     // Последний символ выражения ".", а новый символ не цифра 
     return !(lastSymbol === "." && !digitRegex.test(newSymbol));
+  }
+
+  static isValidSqrtGetting(openedBracketCnt, newSymbol, lastSymbol) {
+    return (/[0-9eπ]/.test(lastSymbol) || (lastSymbol === ")" && openedBracketCnt >= 0)) && newSymbol === "√";
   }
 
   // Плучение правильной скобки
