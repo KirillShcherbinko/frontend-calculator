@@ -1,0 +1,8 @@
+.calculator__button_color_orange {
+  background-color: #DF8419;
+}
+
+.calculator__button_color_orange:hover {
+  background-color: #C15D17;
+  cursor: pointer;
+}

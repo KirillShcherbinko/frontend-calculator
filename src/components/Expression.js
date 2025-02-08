@@ -7,9 +7,26 @@ export class Expression {
     this.openedBracketCnt = 0;
   }
 
+  setExpression(expression) {
+    this.expression = expression;
+  }
+
+  getExpression() {
+    return this.expression;
+  }
+
+  setOpenedBracketCnt(openedBracketCnt) {
+    this.openedBracketCnt = openedBracketCnt;
+  }
+
+  getOpenedBracketCnt() {
+    return this.openedBracketCnt;
+  }
+
   // Получение последнего символа
   getLastSymbol() {
-    return this.expression[this.expression.length - 1] || "";
+    if (!this.expression) return ""
+    return this.expression[this.expression.length - 1];
   }
 
   // Добавление символа
@@ -60,8 +77,9 @@ export class Expression {
 
   // Валидация регулярного выражения
   validateExpression() {
-    // Регулярное выражение для недопустимых символов
+    // Регулярное выражение для символов
     const invalidCharsRegex = /[^0-9eπ+\-*÷^().]/;
+    const operandRegex = /[0-9eπ]/;
     
     // Проверка на незакрытые скобки
     if (this.openedBracketCnt !== 0) {
@@ -71,6 +89,10 @@ export class Expression {
     // Проверка деления на 0
     if (this.expression.includes("÷0")) {
       throw new Error("Нельзя делить на 0");
+    }
+
+    if (!operandRegex.test(this.expression)) {
+      throw new Error("В выражении должны быть числа");
     }
   
     // Проверка на недопустимые символы

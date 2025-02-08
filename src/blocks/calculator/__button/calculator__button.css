@@ -10,7 +10,12 @@
   font-style: normal;
   font-size: clamp(4px, 5vw, 60px);
   color: #DEE1EF;
+  background-color: #82879E;
+}
+
+.calculator__button:hover {
   background-color: #5A5D6C;
+  cursor: pointer;
 }
 
 @media screen and (aspect-ratio > 4/3) {
